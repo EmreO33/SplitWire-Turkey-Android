@@ -87,4 +87,8 @@
     <string name="allowed_apps_dialog_title">Choose apps to route</string>
     <string name="allowed_apps_summary_none">No apps selected</string>
     <string name="allowed_apps_summary_count">%1$d app(s) selected</string>
+
+    <!-- Home screen status subtitles -->
+    <string name="status_sub_disconnected">Tap Connect to bypass DPI blocking</string>
+    <string name="status_sub_connected">Your traffic is being protected</string>
 </resources>

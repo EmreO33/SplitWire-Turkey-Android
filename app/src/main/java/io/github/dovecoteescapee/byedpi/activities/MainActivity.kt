@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
@@ -249,6 +250,8 @@ class MainActivity : AppCompatActivity() {
                         binding.statusButton.setText(R.string.proxy_start)
                     }
                 }
+                binding.statusSubtitle.setText(R.string.status_sub_disconnected)
+                setIndicatorColor(R.color.status_disconnected)
                 binding.statusButton.isEnabled = true
             }
 
@@ -264,8 +267,16 @@ class MainActivity : AppCompatActivity() {
                         binding.statusButton.setText(R.string.proxy_stop)
                     }
                 }
+                binding.statusSubtitle.setText(R.string.status_sub_connected)
+                setIndicatorColor(R.color.status_connected)
                 binding.statusButton.isEnabled = true
             }
         }
+    }
+
+    private fun setIndicatorColor(colorRes: Int) {
+        val tint = ColorStateList.valueOf(ContextCompat.getColor(this, colorRes))
+        binding.statusRing.backgroundTintList = tint
+        binding.statusIcon.imageTintList = tint
     }
 }

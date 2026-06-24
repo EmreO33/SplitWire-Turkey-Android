@@ -84,4 +84,8 @@
     <string name="allowed_apps_dialog_title">Yönlendirilecek uygulamaları seçin</string>
     <string name="allowed_apps_summary_none">Hiçbir uygulama seçilmedi</string>
     <string name="allowed_apps_summary_count">%1$d uygulama seçildi</string>
+
+    <!-- Ana ekran durum alt yazıları -->
+    <string name="status_sub_disconnected">DPI engellemesini aşmak için Bağlan'a dokunun</string>
+    <string name="status_sub_connected">Trafiğiniz korunuyor</string>
 </resources>
