@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SplitWire-Turkey adaptive icon foreground: white crescent + star (Turkish flag motif).
+     108x108 viewport, content kept within the central safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Crescent: outer circle minus an offset inner circle (evenOdd) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:fillType="evenOdd"
+        android:pathData="M26,54 a24,24 0 1,0 48,0 a24,24 0 1,0 -48,0 z
+                          M41,54 a19,19 0 1,0 38,0 a19,19 0 1,0 -38,0 z" />
+
+    <!-- Five-pointed star -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M77,44 L79.35,50.76 L86.5,50.9 L80.8,55.2 L82.9,62.1 L77,58 L71.1,62.1 L73.2,55.2 L67.5,50.9 L74.65,50.76 Z" />
+</vector>

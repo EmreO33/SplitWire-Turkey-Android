@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Only display-name arrays are translated here.
+     The *_entries arrays are values/keys and must stay identical to values/arrays.xml. -->
+<resources>
+    <array name="themes">
+        <item name="system">Sistem</item>
+        <item name="light">Açık</item>
+        <item name="dark">Koyu</item>
+    </array>
+
+    <array name="byedpi_modes">
+        <item name="vpn">VPN</item>
+        <item name="proxy">Proxy</item>
+    </array>
+
+    <array name="byedpi_desync_methods">
+        <item name="none">Yok</item>
+        <item name="split">Bölme (split)</item>
+        <item name="disorder">Karıştırma (disorder)</item>
+        <item name="fake">Sahte (fake)</item>
+        <item name="oob">Bant dışı (OOB)</item>
+        <item name="disoob">Karıştırılmış bant dışı</item>
+    </array>
+
+    <array name="byedpi_hosts_modes">
+        <item name="disable">Devre dışı</item>
+        <item name="blacklist">Kara liste</item>
+        <item name="whitelist">Beyaz liste</item>
+    </array>
+
+    <array name="strategy_presets">
+        <item name="default">Önerilen (Split + Disorder)</item>
+        <item name="auto">Otomatik (torst) + TLS kaydı</item>
+        <item name="discord">Discord (Sahte TTL)</item>
+        <item name="split_sni">SNI konumunda böl</item>
+        <item name="tlsrec">TLS kaydı bölme (SNI)</item>
+        <item name="custom">Özel (manuel ayarlar)</item>
+    </array>
+</resources>
