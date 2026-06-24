@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.content.res.Configuration
 import android.net.TrafficStats
 import android.net.VpnService
 import android.os.Build
@@ -200,10 +201,23 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.action_theme)?.setIcon(
+            if (isCurrentlyDark()) R.drawable.ic_light_mode_24
+            else R.drawable.ic_dark_mode_24
+        )
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val (status, _) = appStatus
 
         return when (item.itemId) {
+            R.id.action_theme -> {
+                toggleTheme()
+                true
+            }
+
             R.id.action_settings -> {
                 if (status == AppStatus.Halted) {
                     val intent = Intent(this, SettingsActivity::class.java)
@@ -299,6 +313,21 @@ class MainActivity : AppCompatActivity() {
                 startStatsTicker()
             }
         }
+    }
+
+    private fun isCurrentlyDark(): Boolean =
+        when (getPreferences().getString("app_theme", "system")) {
+            "dark" -> true
+            "light" -> false
+            else -> (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) ==
+                    Configuration.UI_MODE_NIGHT_YES
+        }
+
+    private fun toggleTheme() {
+        val next = if (isCurrentlyDark()) "light" else "dark"
+        getPreferences().edit().putString("app_theme", next).apply()
+        // setDefaultNightMode recreates the activity; onPrepareOptionsMenu refreshes the icon.
+        MainSettingsFragment.setTheme(next)
     }
 
     private fun setIndicatorColor(colorRes: Int) {
