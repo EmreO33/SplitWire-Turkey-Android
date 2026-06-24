@@ -78,4 +78,13 @@
     <string name="strategy_preset_setting">Strategy preset</string>
     <string name="strategy_preset_summary">Choose a ready-made strategy tuned for Turkish ISPs (Discord, sites, etc.)</string>
     <string name="strategy_applied">Strategy applied. Restart the connection to use it.</string>
+
+    <!-- SplitWire-Turkey per-app routing -->
+    <string name="approuting_category">App routing</string>
+    <string name="route_selected_apps_setting">Route only selected apps</string>
+    <string name="route_selected_apps_summary">When on, only the apps you pick below go through the bypass VPN. When off, all traffic does.</string>
+    <string name="allowed_apps_setting">Selected apps</string>
+    <string name="allowed_apps_dialog_title">Choose apps to route</string>
+    <string name="allowed_apps_summary_none">No apps selected</string>
+    <string name="allowed_apps_summary_count">%1$d app(s) selected</string>
 </resources>

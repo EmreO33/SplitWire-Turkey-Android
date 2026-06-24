@@ -34,6 +34,7 @@ ByeDPI, Windows sürümüyle **aynı motordur** ve paketleri bölerek/karıştı
 - 🎯 **Türkiye'ye göre hazır stratejiler** — tek dokunuşla uygulanan ön ayarlar.
 - 🧠 **ByeDPI motoru** — split, disorder, fake, OOB, TLS record split, otomatik mod.
 - 🛠️ **Gelişmiş düzenleyici** — dilerseniz komut satırı argümanlarını elle girin.
+- 📱 **Uygulama bazlı yönlendirme** — yalnızca seçtiğiniz uygulamaları (ör. sadece Discord) VPN'den geçirin.
 - 🌐 **DNS ayarı** — varsayılan olarak Google DNS (8.8.8.8).
 - 🇹🇷🇬🇧 **Türkçe ve İngilizce arayüz.**
 
@@ -52,7 +53,7 @@ ByeDPI, Windows sürümüyle **aynı motordur** ve paketleri bölerek/karıştı
 
 ### Kurulum
 
-1. [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases) sayfasından son `SplitWire-Turkey-debug.apk` dosyasını indirin.
+1. [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases) sayfasından son `SplitWire-Turkey.apk` dosyasını indirin.
 2. Telefonunuzda **"Bilinmeyen kaynaklardan yükleme"**ye izin verin.
 3. APK'yı kurun, açın ve **Bağlan**'a basın; VPN iznini onaylayın.
 4. Ayarlar → **Strateji ön ayarı**'ndan bir strateji seçin. İşe yaramazsa başka bir ön ayar deneyin.
@@ -94,10 +95,11 @@ ByeDPI is the **same engine** the Windows version uses; it splits/disorders pack
 - 🎯 **Turkey-tuned presets** — one-tap bypass strategies.
 - 🧠 **ByeDPI engine** — split, disorder, fake, OOB, TLS record split, auto mode.
 - 🛠️ **Advanced editor** — enter raw command-line arguments if you prefer.
+- 📱 **Per-app routing** — send only the apps you pick (e.g. just Discord) through the VPN.
 - 🌐 **DNS setting** — defaults to Google DNS (8.8.8.8).
 - 🇹🇷🇬🇧 **Turkish and English UI.**
 
-See the preset table above. Install the `SplitWire-Turkey-debug.apk` from [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases), allow installation from unknown sources, open the app, tap **Connect**, grant VPN permission, and pick a strategy. If one strategy doesn't work on your ISP, try another preset.
+See the preset table above. Install the `SplitWire-Turkey.apk` from [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases), allow installation from unknown sources, open the app, tap **Connect**, grant VPN permission, and pick a strategy. If one strategy doesn't work on your ISP, try another preset.
 
 ### Building from source
 

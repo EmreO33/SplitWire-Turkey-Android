@@ -19,3 +19,7 @@ local.properties
 # Claude Code agent workspace (not part of the app)
 /.claude
 /.idea
+
+# Release signing (keep private, never commit)
+*.jks
+*.keystore

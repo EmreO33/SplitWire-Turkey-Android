@@ -3,6 +3,7 @@ package io.github.dovecoteescapee.byedpi.services
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.ParcelFileDescriptor
@@ -297,7 +298,24 @@ class ByeDpiVpnService : LifecycleVpnService() {
             builder.setMetered(false)
         }
 
-        builder.addDisallowedApplication(applicationContext.packageName)
+        // SplitWire-Turkey: optionally route only user-selected apps through the bypass.
+        val prefs = getPreferences()
+        val routeSelected = prefs.getBoolean("route_selected_apps_enable", false)
+        val allowedApps = prefs.getStringSet("allowed_apps", emptySet()) ?: emptySet()
+
+        if (routeSelected && allowedApps.isNotEmpty()) {
+            // addAllowedApplication and addDisallowedApplication are mutually exclusive.
+            // Only the listed apps go through the VPN; our own app is excluded by not being listed.
+            for (pkg in allowedApps) {
+                try {
+                    builder.addAllowedApplication(pkg)
+                } catch (e: PackageManager.NameNotFoundException) {
+                    Log.w(TAG, "Allowed app not installed, skipping: $pkg")
+                }
+            }
+        } else {
+            builder.addDisallowedApplication(applicationContext.packageName)
+        }
 
         return builder
     }

@@ -50,6 +50,22 @@
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
+        android:title="@string/approuting_category">
+
+        <SwitchPreference
+            android:key="route_selected_apps_enable"
+            android:title="@string/route_selected_apps_setting"
+            android:summary="@string/route_selected_apps_summary"
+            android:defaultValue="false" />
+
+        <MultiSelectListPreference
+            android:key="allowed_apps"
+            android:title="@string/allowed_apps_setting"
+            android:dialogTitle="@string/allowed_apps_dialog_title" />
+
+    </androidx.preference.PreferenceCategory>
+
+    <androidx.preference.PreferenceCategory
         android:title="@string/byedpi_category">
 
         <SwitchPreference

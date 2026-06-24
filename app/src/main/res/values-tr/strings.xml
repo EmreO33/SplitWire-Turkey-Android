@@ -75,4 +75,13 @@
     <string name="strategy_preset_setting">Strateji ön ayarı</string>
     <string name="strategy_preset_summary">Türk operatörleri için hazırlanmış bir strateji seçin (Discord, siteler vb.)</string>
     <string name="strategy_applied">Strateji uygulandı. Kullanmak için bağlantıyı yeniden başlatın.</string>
+
+    <!-- SplitWire-Turkey uygulama yönlendirme -->
+    <string name="approuting_category">Uygulama yönlendirme</string>
+    <string name="route_selected_apps_setting">Yalnızca seçili uygulamaları yönlendir</string>
+    <string name="route_selected_apps_summary">Açıkken yalnızca aşağıda seçtiğiniz uygulamalar VPN üzerinden geçer. Kapalıyken tüm trafik geçer.</string>
+    <string name="allowed_apps_setting">Seçili uygulamalar</string>
+    <string name="allowed_apps_dialog_title">Yönlendirilecek uygulamaları seçin</string>
+    <string name="allowed_apps_summary_none">Hiçbir uygulama seçilmedi</string>
+    <string name="allowed_apps_summary_count">%1$d uygulama seçildi</string>
 </resources>
