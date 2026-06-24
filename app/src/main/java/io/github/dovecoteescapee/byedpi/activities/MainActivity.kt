@@ -8,9 +8,15 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
+import android.net.TrafficStats
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Process
+import android.os.SystemClock
+import android.view.View
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -25,6 +31,9 @@ import io.github.dovecoteescapee.byedpi.fragments.MainSettingsFragment
 import io.github.dovecoteescapee.byedpi.databinding.ActivityMainBinding
 import io.github.dovecoteescapee.byedpi.services.ServiceManager
 import io.github.dovecoteescapee.byedpi.services.appStatus
+import io.github.dovecoteescapee.byedpi.services.connectedSince
+import io.github.dovecoteescapee.byedpi.services.sessionBaselineRx
+import io.github.dovecoteescapee.byedpi.services.sessionBaselineTx
 import io.github.dovecoteescapee.byedpi.utility.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +41,14 @@ import java.io.IOException
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private val statsHandler = Handler(Looper.getMainLooper())
+    private val statsTicker = object : Runnable {
+        override fun run() {
+            updateStats()
+            statsHandler.postDelayed(this, 1000)
+        }
+    }
 
     companion object {
         private val TAG: String = MainActivity::class.java.simpleName
@@ -167,8 +184,14 @@ class MainActivity : AppCompatActivity() {
         updateStatus()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopStatsTicker()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
+        stopStatsTicker()
         unregisterReceiver(receiver)
     }
 
@@ -253,6 +276,8 @@ class MainActivity : AppCompatActivity() {
                 binding.statusSubtitle.setText(R.string.status_sub_disconnected)
                 setIndicatorColor(R.color.status_disconnected)
                 binding.statusButton.isEnabled = true
+                stopStatsTicker()
+                binding.statsRow.visibility = View.GONE
             }
 
             AppStatus.Running -> {
@@ -270,6 +295,8 @@ class MainActivity : AppCompatActivity() {
                 binding.statusSubtitle.setText(R.string.status_sub_connected)
                 setIndicatorColor(R.color.status_connected)
                 binding.statusButton.isEnabled = true
+                binding.statsRow.visibility = View.VISIBLE
+                startStatsTicker()
             }
         }
     }
@@ -278,5 +305,47 @@ class MainActivity : AppCompatActivity() {
         val tint = ColorStateList.valueOf(ContextCompat.getColor(this, colorRes))
         binding.statusRing.backgroundTintList = tint
         binding.statusIcon.imageTintList = tint
+    }
+
+    private fun startStatsTicker() {
+        statsHandler.removeCallbacks(statsTicker)
+        statsHandler.post(statsTicker)
+    }
+
+    private fun stopStatsTicker() {
+        statsHandler.removeCallbacks(statsTicker)
+    }
+
+    private fun updateStats() {
+        val since = connectedSince ?: return
+        val elapsedMs = SystemClock.elapsedRealtime() - since
+        binding.statUptime.text = formatDuration(elapsedMs)
+
+        val uid = Process.myUid()
+        val rx = (TrafficStats.getUidRxBytes(uid) - sessionBaselineRx).coerceAtLeast(0)
+        val tx = (TrafficStats.getUidTxBytes(uid) - sessionBaselineTx).coerceAtLeast(0)
+        binding.statDown.text = formatBytes(rx)
+        binding.statUp.text = formatBytes(tx)
+    }
+
+    private fun formatDuration(ms: Long): String {
+        val totalSeconds = ms / 1000
+        val hours = totalSeconds / 3600
+        val minutes = (totalSeconds % 3600) / 60
+        val seconds = totalSeconds % 60
+        return if (hours > 0) {
+            String.format("%d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            String.format("%02d:%02d", minutes, seconds)
+        }
+    }
+
+    private fun formatBytes(bytes: Long): String {
+        if (bytes < 1024) return "$bytes B"
+        val kb = bytes / 1024.0
+        if (kb < 1024) return String.format("%.1f KB", kb)
+        val mb = kb / 1024.0
+        if (mb < 1024) return String.format("%.1f MB", mb)
+        return String.format("%.2f GB", mb / 1024.0)
     }
 }

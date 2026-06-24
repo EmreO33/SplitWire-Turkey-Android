@@ -88,4 +88,9 @@
     <!-- Ana ekran durum alt yazıları -->
     <string name="status_sub_disconnected">DPI engellemesini aşmak için Bağlan\'a dokunun</string>
     <string name="status_sub_connected">Trafiğiniz korunuyor</string>
+
+    <!-- Bağlantı istatistikleri -->
+    <string name="stat_uptime_label">Süre</string>
+    <string name="stat_down_label">İndirilen</string>
+    <string name="stat_up_label">Yüklenen</string>
 </resources>

@@ -91,4 +91,9 @@
     <!-- Home screen status subtitles -->
     <string name="status_sub_disconnected">Tap Connect to bypass DPI blocking</string>
     <string name="status_sub_connected">Your traffic is being protected</string>
+
+    <!-- Connection stats -->
+    <string name="stat_uptime_label">Uptime</string>
+    <string name="stat_down_label">Downloaded</string>
+    <string name="stat_up_label">Uploaded</string>
 </resources>
