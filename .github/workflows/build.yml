@@ -46,39 +46,48 @@ jobs:
             echo "No keystore secret — release APK will be unsigned."
           fi
 
-      - name: Build debug APK
-        run: ./gradlew --no-daemon assembleDebug
+      - name: Build FOSS debug APK
+        run: ./gradlew --no-daemon assembleFossDebug
 
-      - name: Build release APK
+      - name: Build release editions
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: ./gradlew --no-daemon assembleRelease
+        run: ./gradlew --no-daemon assembleFossRelease assemblePlayRelease bundlePlayRelease
 
-      - name: Stage APKs
+      - name: Stage artifacts
         run: |
           mkdir -p out
-          cp app/build/outputs/apk/debug/app-debug.apk \
-             "out/SplitWire-Turkey-debug.apk"
-          if [ -f app/build/outputs/apk/release/app-release.apk ]; then
-            cp app/build/outputs/apk/release/app-release.apk \
-               "out/SplitWire-Turkey.apk"
+          apk=app/build/outputs/apk
+
+          cp "$apk/foss/debug/app-foss-debug.apk" "out/SplitWire-Turkey-debug.apk"
+
+          # FOSS release (ad-free) — primary download for F-Droid / GitHub
+          if [ -f "$apk/foss/release/app-foss-release.apk" ]; then
+            cp "$apk/foss/release/app-foss-release.apk" "out/SplitWire-Turkey.apk"
           else
-            cp app/build/outputs/apk/release/app-release-unsigned.apk \
-               "out/SplitWire-Turkey-release-unsigned.apk"
+            cp "$apk/foss/release/app-foss-release-unsigned.apk" "out/SplitWire-Turkey-unsigned.apk"
           fi
 
-      - name: Upload APK artifacts
+          # Play edition (with ads) — APK for sideload testing + AAB for Play upload
+          if [ -f "$apk/play/release/app-play-release.apk" ]; then
+            cp "$apk/play/release/app-play-release.apk" "out/SplitWire-Turkey-play.apk"
+          fi
+          if [ -f app/build/outputs/bundle/playRelease/app-play-release.aab ]; then
+            cp app/build/outputs/bundle/playRelease/app-play-release.aab "out/SplitWire-Turkey-play.aab"
+          fi
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: SplitWire-Turkey-APKs
-          path: out/*.apk
+          name: SplitWire-Turkey-builds
+          path: out/*
           if-no-files-found: error
 
       - name: Publish release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: out/*.apk
+          files: out/*
           generate_release_notes: true

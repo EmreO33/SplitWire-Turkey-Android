@@ -107,6 +107,17 @@ You don't need a local Android SDK — the APK is **built in the cloud by GitHub
 
 ---
 
+## Editions / Sürümler
+
+Two editions are built from this one codebase:
+
+- **FOSS** (`SplitWire-Turkey.apk`) — no ads, no proprietary dependencies. This is the version published here on GitHub Releases and intended for F-Droid. **Recommended.**
+- **Play** (`SplitWire-Turkey-play.apk` / `.aab`) — includes an AdMob banner, for distribution on the Google Play Store.
+
+İki sürüm tek kod tabanından üretilir: **FOSS** reklamsızdır (GitHub/F-Droid, önerilen), **Play** sürümünde AdMob banner reklamı bulunur (Google Play için).
+
+> The Play edition currently ships with Google's **test** AdMob IDs. Replace them with your own (in `app/src/play/java/.../ads/AdManager.kt` and `app/src/play/AndroidManifest.xml`) before publishing to earn revenue.
+
 ## Credits & License
 
 This project is a fork/rebrand built on top of excellent open-source work:

@@ -13,8 +13,8 @@ android {
         applicationId = "com.splitwireturkey.android"
         minSdk = 21
         targetSdk = 34
-        versionCode = 5
-        versionName = "1.0.4"
+        versionCode = 6
+        versionName = "1.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -28,6 +28,19 @@ android {
 
     buildFeatures {
         buildConfig = true
+    }
+
+    // Two editions from one codebase:
+    //   foss  -> no ads, no proprietary deps (F-Droid, GitHub Releases)
+    //   play  -> AdMob banner (Google Play Store)
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("foss") {
+            dimension = "distribution"
+        }
+        create("play") {
+            dimension = "distribution"
+        }
     }
 
     // Release signing is configured only when the keystore env vars are present
@@ -94,6 +107,8 @@ dependencies {
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("androidx.lifecycle:lifecycle-service:2.8.4")
+    // AdMob is only linked into the Play edition; the FOSS edition stays free of proprietary deps.
+    "playImplementation"("com.google.android.gms:play-services-ads:22.6.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
