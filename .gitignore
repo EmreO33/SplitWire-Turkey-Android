@@ -23,3 +23,6 @@ local.properties
 # Release signing (keep private, never commit)
 *.jks
 *.keystore
+
+# Raw icon source (generated mipmaps are committed instead)
+icon-source.png
