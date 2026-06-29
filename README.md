@@ -1,16 +1,20 @@
 <div align="center">
 
+<img src=".github/images/icon.png" width="120" alt="DeSync icon" />
+
 # DeSync
 
-**Türkiye'deki DPI engellerini kök (root) gerektirmeden aşmak için bir Android uygulaması.**
-*An Android app to bypass DPI-based internet blocking in Turkey — no root required.*
-
-*NOT: DESYNC'IN VPN KULLANMASI NEDENI BYEDPI MOTORU OLMASIDIR. VPN OLARAK ÇALIŞMAZ. IP NIZI GIZLEMEYECEKTIR VE BILGILERINIZ CIHAZINIZDAN ÇIKMAYACAKTIR*
+**Türkiye'deki DPI engellerini kök (root) gerektirmeden aşan bir Android uygulaması.**
+*An Android app that bypasses DPI-based internet blocking in Turkey — no root required.*
 
 [![Build APK](https://github.com/EmreO33/SplitWire-Turkey-Android/actions/workflows/build.yml/badge.svg)](https://github.com/EmreO33/SplitWire-Turkey-Android/actions/workflows/build.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 </div>
+
+> **🇹🇷 Önemli:** DeSync bir gizlilik/VPN uygulaması **değildir**. Android'in VpnService'ini yalnızca cihaz trafiğini yerel ByeDPI motoruna yönlendirmek için kullanır. IP adresinizi **gizlemez** ve hiçbir veriniz cihazınızdan **dışarı çıkmaz**.
+>
+> **🇬🇧 Important:** DeSync is **not** a privacy VPN. It uses Android's VpnService only as plumbing to route device traffic through the local ByeDPI engine. It does **not** hide your IP address, and none of your data leaves your device.
 
 ---
 
@@ -18,13 +22,13 @@
 
 ### Nedir?
 
-DeSync, operatör (ISP) düzeyindeki DPI (Derin Paket İncelemesi) engellerini aşan bir Android uygulamasıdır. Discord, çeşitli web siteleri ve başka servislerin engellenmesini aşmaya yarar. **Root gerektirmeyen** standart Android yaklaşımını kullanır:
+DeSync, operatör (ISP) düzeyindeki DPI (Derin Paket İncelemesi) engellerini aşan bir Android uygulamasıdır. Discord, çeşitli web siteleri ve diğer servislerin engellenmesini aşmaya yarar. **Root gerektirmeyen** standart Android yaklaşımını kullanır:
 
 ```
 Cihaz trafiği  →  Android VpnService (tun)  →  hev-socks5-tunnel  →  yerel ByeDPI proxy (127.0.0.1:1080)  →  internet
 ```
 
-ByeDPI motoru paketleri bölerek/karıştırarak DPI'ın isteği analiz etmesini engeller. Trafik şifreli bir sunucuya yönlendirilmez; sadece yerel olarak işlenir.
+ByeDPI motoru paketleri bölerek/karıştırarak DPI'ın isteği analiz etmesini engeller. Trafik uzaktaki bir sunucuya yönlendirilmez; yalnızca cihaz üzerinde yerel olarak işlenir.
 
 > ⚠️ **Sorumluluk reddi:** Bu yazılım eğitim amaçlıdır. Yürürlükteki yasalara ve düzenlemelere uymak tamamen kullanıcının sorumluluğundadır.
 
@@ -34,7 +38,7 @@ ByeDPI motoru paketleri bölerek/karıştırarak DPI'ın isteği analiz etmesini
 - 🎯 **Hazır stratejiler** — tek dokunuşla uygulanan ön ayarlar.
 - 🧠 **ByeDPI motoru** — split, disorder, fake, OOB, TLS record split, otomatik mod.
 - ⚙️ **Gelişmiş seçenekler** — komut satırı argümanlarını ve tüm parametreleri elle ayarlayın.
-- 📱 **Uygulama bazlı yönlendirme** — yalnızca seçtiğiniz uygulamaları (ör. sadece Discord) VPN'den geçirin.
+- 📱 **Uygulama bazlı yönlendirme** — yalnızca seçtiğiniz uygulamaları (ör. sadece Discord) yönlendirin.
 - 📊 **Bağlantı istatistikleri** — bağlantı süresi ve oturum veri kullanımı.
 - 🌗 **Açık/koyu tema** — araç çubuğundan tek dokunuşla.
 - 🌐 **DNS ayarı** — varsayılan olarak Google DNS (8.8.8.8).
@@ -55,10 +59,14 @@ ByeDPI motoru paketleri bölerek/karıştırarak DPI'ın isteği analiz etmesini
 
 ### Kurulum
 
-1. [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases) sayfasından son `DeSync.apk` dosyasını indirin.
+1. [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases) sayfasından en güncel `DeSync.apk` dosyasını indirin.
 2. Telefonunuzda **"Bilinmeyen kaynaklardan yükleme"**ye izin verin.
 3. APK'yı kurun, açın ve **Bağlan**'a basın; VPN iznini onaylayın.
 4. Ayarlar → **Strateji ön ayarı**'ndan bir strateji seçin. İşe yaramazsa başka bir ön ayar deneyin.
+
+### Kaynaktan derleme
+
+Yerel olarak Android SDK kurmaya gerek yok — APK, her `main` push'unda ve her `v*` etiketinde **GitHub Actions ile bulutta** derlenir. Çalışmanın "Artifacts" bölümünden ya da bir etiket yayınladığınızda Releases sayfasından indirin. Yerel derleme için JDK 17, Android SDK 34, NDK `26.1.10909125`, CMake `3.22.1` gerekir; ardından `./gradlew assembleRelease`.
 
 ---
 
@@ -72,7 +80,7 @@ DeSync is an Android app that bypasses ISP-level DPI (Deep Packet Inspection) bl
 Device traffic  →  Android VpnService (tun)  →  hev-socks5-tunnel  →  local ByeDPI proxy (127.0.0.1:1080)  →  internet
 ```
 
-The ByeDPI engine splits/disorders packets so DPI cannot properly analyze the request. Traffic is not routed to a remote encrypted server — it is only processed locally.
+The ByeDPI engine splits/disorders packets so DPI cannot properly analyze the request. Traffic is not routed to a remote server; it is only processed locally on the device.
 
 > ⚠️ **Disclaimer:** This software is for educational purposes. You are solely responsible for complying with applicable laws and regulations.
 
@@ -82,13 +90,31 @@ The ByeDPI engine splits/disorders packets so DPI cannot properly analyze the re
 - 🎯 **Ready-made presets** — one-tap bypass strategies.
 - 🧠 **ByeDPI engine** — split, disorder, fake, OOB, TLS record split, auto mode.
 - ⚙️ **Advanced options** — hand-tune command-line arguments and every parameter.
-- 📱 **Per-app routing** — send only the apps you pick (e.g. just Discord) through the VPN.
+- 📱 **Per-app routing** — route only the apps you pick (e.g. just Discord).
 - 📊 **Connection stats** — uptime and session data usage.
 - 🌗 **Light/dark theme** — one tap from the toolbar.
 - 🌐 **DNS setting** — defaults to Google DNS (8.8.8.8).
 - 🇹🇷🇬🇧 **Turkish and English UI.**
 
-See the preset table above. Install `DeSync.apk` from [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases), allow installation from unknown sources, open the app, tap **Connect**, grant VPN permission, and pick a strategy. If one strategy doesn't work on your ISP, try another preset.
+### Strategy presets
+
+| Preset | ByeDPI arguments | Description |
+|---|---|---|
+| Recommended | `--split 1 --disorder 1` | Sensible default that works in most cases. |
+| Auto | `--disorder 1 --auto=torst --tlsrec 1+s` | Applies a bypass strategy automatically when blocking/breakage is detected. |
+| Discord | `--fake -1 --ttl 8` | Fake packet + low TTL. |
+| Split at SNI | `--split 1+s --disorder 1+s` | Splits the request at the SNI position. |
+| TLS record split | `--tlsrec 1+s` | Splits the ClientHello into separate TLS records. |
+| Custom | — | Uses the Advanced options / command-line editor. |
+
+> Note: none of the presets change the proxy port; it stays at **1080** (the VPN tunnel expects this).
+
+### Installation
+
+1. Download the latest `DeSync.apk` from [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases).
+2. Allow **"install from unknown sources"** on your phone.
+3. Install the APK, open it, tap **Connect**, and grant the VPN permission.
+4. Go to Settings → **Strategy preset** and pick a strategy. If one doesn't work on your ISP, try another.
 
 ### Building from source
 
@@ -97,8 +123,8 @@ You don't need a local Android SDK — the APK is **built in the cloud by GitHub
 To cut a release:
 
 ```bash
-git tag v1.2.0
-git push origin v1.2.0
+git tag v1.2.3
+git push origin v1.2.3
 ```
 
 ---
