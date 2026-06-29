@@ -3,9 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- SplitWire-Turkey brand + status colors -->
-    <color name="brand_red">#E30A17</color>
-    <color name="brand_red_dark">#B00812</color>
+    <!-- DeSync brand + status colors (blue, matching the app icon) -->
+    <color name="brand_blue">#1573E6</color>
+    <color name="brand_blue_dark">#0D52B0</color>
     <color name="status_connected">#1DB954</color>
     <color name="status_disconnected">#9AA0A6</color>
 </resources>
