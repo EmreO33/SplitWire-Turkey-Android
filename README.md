@@ -5,6 +5,8 @@
 **Türkiye'deki DPI engellerini kök (root) gerektirmeden aşmak için bir Android uygulaması.**
 *An Android app to bypass DPI-based internet blocking in Turkey — no root required.*
 
+*NOT: DESYNC'IN VPN KULLANMASI NEDENI BYEDPI MOTORU OLMASIDIR. VPN OLARAK ÇALIŞMAZ. IP NIZI GIZLEMEYECEKTIR VE BILGILERINIZ CIHAZINIZDAN ÇIKMAYACAKTIR*
+
 [![Build APK](https://github.com/EmreO33/SplitWire-Turkey-Android/actions/workflows/build.yml/badge.svg)](https://github.com/EmreO33/SplitWire-Turkey-Android/actions/workflows/build.yml)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
