@@ -1,6 +1,6 @@
 <div align="center">
 
-# SplitWire-Turkey (Android)
+# DeSync
 
 **Türkiye'deki DPI engellerini kök (root) gerektirmeden aşmak için bir Android uygulaması.**
 *An Android app to bypass DPI-based internet blocking in Turkey — no root required.*
@@ -16,25 +16,25 @@
 
 ### Nedir?
 
-SplitWire-Turkey (Android), [SplitWire-Turkey](https://github.com/cagritaskn/SplitWire-Turkey) Windows uygulamasının ruhunu Android'e taşıyan bir DPI (Derin Paket İncelemesi) aşma aracıdır. Discord, çeşitli web siteleri ve başka servislerin operatör (ISP) düzeyinde engellenmesini aşmaya yarar.
-
-Windows sürümü çekirdek seviyesinde paket işleme (WinDivert + zapret/GoodbyeDPI/ByeDPI) ve WireGuard kullanır. Bunların çoğunun Android'de doğrudan karşılığı yoktur. Bu uygulama, Android'de **root gerektirmeyen** standart yaklaşımı kullanır:
+DeSync, operatör (ISP) düzeyindeki DPI (Derin Paket İncelemesi) engellerini aşan bir Android uygulamasıdır. Discord, çeşitli web siteleri ve başka servislerin engellenmesini aşmaya yarar. **Root gerektirmeyen** standart Android yaklaşımını kullanır:
 
 ```
 Cihaz trafiği  →  Android VpnService (tun)  →  hev-socks5-tunnel  →  yerel ByeDPI proxy (127.0.0.1:1080)  →  internet
 ```
 
-ByeDPI, Windows sürümüyle **aynı motordur** ve paketleri bölerek/karıştırarak DPI'ın isteği analiz etmesini engeller. Trafik şifreli bir sunucuya yönlendirilmez; sadece yerel olarak işlenir.
+ByeDPI motoru paketleri bölerek/karıştırarak DPI'ın isteği analiz etmesini engeller. Trafik şifreli bir sunucuya yönlendirilmez; sadece yerel olarak işlenir.
 
 > ⚠️ **Sorumluluk reddi:** Bu yazılım eğitim amaçlıdır. Yürürlükteki yasalara ve düzenlemelere uymak tamamen kullanıcının sorumluluğundadır.
 
 ### Özellikler
 
 - 🔌 **Root gerektirmez** — Android VpnService ile çalışır.
-- 🎯 **Türkiye'ye göre hazır stratejiler** — tek dokunuşla uygulanan ön ayarlar.
+- 🎯 **Hazır stratejiler** — tek dokunuşla uygulanan ön ayarlar.
 - 🧠 **ByeDPI motoru** — split, disorder, fake, OOB, TLS record split, otomatik mod.
-- 🛠️ **Gelişmiş düzenleyici** — dilerseniz komut satırı argümanlarını elle girin.
+- ⚙️ **Gelişmiş seçenekler** — komut satırı argümanlarını ve tüm parametreleri elle ayarlayın.
 - 📱 **Uygulama bazlı yönlendirme** — yalnızca seçtiğiniz uygulamaları (ör. sadece Discord) VPN'den geçirin.
+- 📊 **Bağlantı istatistikleri** — bağlantı süresi ve oturum veri kullanımı.
+- 🌗 **Açık/koyu tema** — araç çubuğundan tek dokunuşla.
 - 🌐 **DNS ayarı** — varsayılan olarak Google DNS (8.8.8.8).
 - 🇹🇷🇬🇧 **Türkçe ve İngilizce arayüz.**
 
@@ -42,34 +42,21 @@ ByeDPI, Windows sürümüyle **aynı motordur** ve paketleri bölerek/karıştı
 
 | Ön ayar | ByeDPI argümanları | Açıklama |
 |---|---|---|
-| Önerilen | `--split 1 --disorder 1` | Windows sürümünün varsayılanı; çoğu durumda iyi çalışır. |
+| Önerilen | `--split 1 --disorder 1` | Çoğu durumda iyi çalışan varsayılan. |
 | Otomatik | `--disorder 1 --auto=torst --tlsrec 1+s` | Engel/bozulma algılanınca otomatik strateji uygular. |
 | Discord | `--fake -1 --ttl 8` | Sahte paket + düşük TTL. |
 | SNI'de böl | `--split 1+s --disorder 1+s` | İsteği SNI konumunda böler. |
 | TLS kaydı böl | `--tlsrec 1+s` | ClientHello'yu ayrı TLS kayıtlarına böler. |
-| Özel | — | Manuel arayüz/komut satırı düzenleyicisini kullanır. |
+| Özel | — | Gelişmiş seçenekler / komut satırı düzenleyicisini kullanır. |
 
 > Not: Hiçbir ön ayar proxy portunu değiştirmez; port **1080** olarak kalır (VPN tüneli bunu bekler).
 
 ### Kurulum
 
-1. [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases) sayfasından son `SplitWire-Turkey.apk` dosyasını indirin.
+1. [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases) sayfasından son `DeSync.apk` dosyasını indirin.
 2. Telefonunuzda **"Bilinmeyen kaynaklardan yükleme"**ye izin verin.
 3. APK'yı kurun, açın ve **Bağlan**'a basın; VPN iznini onaylayın.
 4. Ayarlar → **Strateji ön ayarı**'ndan bir strateji seçin. İşe yaramazsa başka bir ön ayar deneyin.
-
-### Kaynaktan derleme
-
-Yerel olarak Android SDK kurmaya gerek yok — her `main` push'unda ve `v*` etiketinde APK **GitHub Actions ile bulutta** derlenir. APK'yı Actions çalışmasının "Artifacts" bölümünden veya bir sürüm yayınladığınızda Releases'ten indirin.
-
-Yeni bir sürüm yayınlamak için:
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
-Android Studio ile yerel derleme için: JDK 17, Android SDK 34, NDK `26.1.10909125`, CMake `3.22.1` gerekir, ardından `./gradlew assembleDebug`.
 
 ---
 
@@ -77,52 +64,48 @@ Android Studio ile yerel derleme için: JDK 17, Android SDK 34, NDK `26.1.109091
 
 ### What is it?
 
-SplitWire-Turkey (Android) brings the spirit of the Windows [SplitWire-Turkey](https://github.com/cagritaskn/SplitWire-Turkey) tool to Android. It bypasses ISP-level DPI blocking of Discord, websites, and other services.
-
-The Windows version relies on kernel-level packet manipulation (WinDivert + zapret/GoodbyeDPI/ByeDPI) and WireGuard, most of which has no direct Android equivalent. This app uses the standard **no-root** Android approach:
+DeSync is an Android app that bypasses ISP-level DPI (Deep Packet Inspection) blocking of Discord, websites, and other services. It uses the standard **no-root** Android approach:
 
 ```
 Device traffic  →  Android VpnService (tun)  →  hev-socks5-tunnel  →  local ByeDPI proxy (127.0.0.1:1080)  →  internet
 ```
 
-ByeDPI is the **same engine** the Windows version uses; it splits/disorders packets so DPI cannot properly analyze the request. Traffic is not routed to a remote encrypted server — it is only processed locally.
+The ByeDPI engine splits/disorders packets so DPI cannot properly analyze the request. Traffic is not routed to a remote encrypted server — it is only processed locally.
 
 > ⚠️ **Disclaimer:** This software is for educational purposes. You are solely responsible for complying with applicable laws and regulations.
 
 ### Features
 
 - 🔌 **No root required** — built on Android `VpnService`.
-- 🎯 **Turkey-tuned presets** — one-tap bypass strategies.
+- 🎯 **Ready-made presets** — one-tap bypass strategies.
 - 🧠 **ByeDPI engine** — split, disorder, fake, OOB, TLS record split, auto mode.
-- 🛠️ **Advanced editor** — enter raw command-line arguments if you prefer.
+- ⚙️ **Advanced options** — hand-tune command-line arguments and every parameter.
 - 📱 **Per-app routing** — send only the apps you pick (e.g. just Discord) through the VPN.
+- 📊 **Connection stats** — uptime and session data usage.
+- 🌗 **Light/dark theme** — one tap from the toolbar.
 - 🌐 **DNS setting** — defaults to Google DNS (8.8.8.8).
 - 🇹🇷🇬🇧 **Turkish and English UI.**
 
-See the preset table above. Install the `SplitWire-Turkey.apk` from [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases), allow installation from unknown sources, open the app, tap **Connect**, grant VPN permission, and pick a strategy. If one strategy doesn't work on your ISP, try another preset.
+See the preset table above. Install `DeSync.apk` from [Releases](https://github.com/EmreO33/SplitWire-Turkey-Android/releases), allow installation from unknown sources, open the app, tap **Connect**, grant VPN permission, and pick a strategy. If one strategy doesn't work on your ISP, try another preset.
 
 ### Building from source
 
-You don't need a local Android SDK — the APK is **built in the cloud by GitHub Actions** on every push to `main` and every `v*` tag. Download it from the run's "Artifacts" section, or from Releases when you publish a tag. For local builds use JDK 17, Android SDK 34, NDK `26.1.10909125`, CMake `3.22.1`, then `./gradlew assembleDebug`.
+You don't need a local Android SDK — the APK is **built in the cloud by GitHub Actions** on every push to `main` and every `v*` tag. Download it from the run's "Artifacts" section, or from Releases when you publish a tag. For local builds use JDK 17, Android SDK 34, NDK `26.1.10909125`, CMake `3.22.1`, then `./gradlew assembleRelease`.
+
+To cut a release:
+
+```bash
+git tag v1.2.0
+git push origin v1.2.0
+```
 
 ---
 
-## Editions / Sürümler
-
-Two editions are built from this one codebase:
-
-- **FOSS** (`SplitWire-Turkey.apk`) — no ads, no proprietary dependencies. This is the version published here on GitHub Releases and intended for F-Droid. **Recommended.**
-- **Play** (`SplitWire-Turkey-play.apk` / `.aab`) — includes an AdMob banner, for distribution on the Google Play Store.
-
-İki sürüm tek kod tabanından üretilir: **FOSS** reklamsızdır (GitHub/F-Droid, önerilen), **Play** sürümünde AdMob banner reklamı bulunur (Google Play için).
-
-> The Play edition currently ships with Google's **test** AdMob IDs. Replace them with your own (in `app/src/play/java/.../ads/AdManager.kt` and `app/src/play/AndroidManifest.xml`) before publishing to earn revenue.
-
 ## Credits & License
 
-This project is a fork/rebrand built on top of excellent open-source work:
+DeSync is built on top of excellent open-source work:
 
-- **[ByeDPIAndroid](https://github.com/dovecoteescapee/ByeDPIAndroid)** by dovecoteescapee — the Android app architecture this fork is based on (GPL-3.0).
+- **[ByeDPIAndroid](https://github.com/dovecoteescapee/ByeDPIAndroid)** by dovecoteescapee — the Android app architecture this project is based on (GPL-3.0).
 - **[ByeDPI](https://github.com/hufrea/byedpi)** by hufrea — the DPI-bypass engine.
 - **[hev-socks5-tunnel](https://github.com/heiher/hev-socks5-tunnel)** by heiher — tun-to-SOCKS5 tunneling.
 - **[SplitWire-Turkey](https://github.com/cagritaskn/SplitWire-Turkey)** by cagritaskn — the original Windows project and inspiration.

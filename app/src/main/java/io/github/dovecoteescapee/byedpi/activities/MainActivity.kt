@@ -27,7 +27,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import io.github.dovecoteescapee.byedpi.R
-import io.github.dovecoteescapee.byedpi.ads.AdManager
 import io.github.dovecoteescapee.byedpi.data.*
 import io.github.dovecoteescapee.byedpi.fragments.MainSettingsFragment
 import io.github.dovecoteescapee.byedpi.databinding.ActivityMainBinding
@@ -145,9 +144,6 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // No-op in the FOSS edition; loads a banner in the Play edition.
-        AdManager.attachBanner(this, binding.adContainer)
 
         val intentFilter = IntentFilter().apply {
             addAction(STARTED_BROADCAST)

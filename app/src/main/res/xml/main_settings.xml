@@ -66,7 +66,7 @@
     </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
-        android:title="@string/byedpi_category">
+        android:title="@string/advanced_category">
 
         <SwitchPreference
             android:key="byedpi_enable_cmd_settings"

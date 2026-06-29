@@ -39,7 +39,7 @@
     <string name="failed_to_start">%1$s başlatılamadı</string>
     <string name="vpn_channel_name">VPN</string>
     <string name="proxy_channel_name">Proxy</string>
-    <string name="notification_title">SplitWire-Turkey</string>
+    <string name="notification_title">DeSync</string>
     <string name="vpn_notification_content">VPN çalışıyor</string>
     <string name="proxy_notification_content">Proxy çalışıyor</string>
     <string name="general_category">Genel</string>
@@ -93,4 +93,7 @@
     <string name="stat_uptime_label">Süre</string>
     <string name="stat_down_label">İndirilen</string>
     <string name="stat_up_label">Yüklenen</string>
+
+    <!-- Gelişmiş seçenekler -->
+    <string name="advanced_category">Gelişmiş seçenekler</string>
 </resources>
