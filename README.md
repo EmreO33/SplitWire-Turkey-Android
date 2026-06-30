@@ -4,7 +4,7 @@
 
 # DeSync
 
-**Türkiye'deki DPI engellerini kök (root) gerektirmeden aşan bir Android uygulaması.**
+**Türkiye'deki DPI engellerini root gerektirmeden aşan bir Android uygulaması.**
 *An Android app that bypasses DPI-based internet blocking in Turkey — no root required.*
 
 [![Build APK](https://github.com/EmreO33/SplitWire-Turkey-Android/actions/workflows/build.yml/badge.svg)](https://github.com/EmreO33/SplitWire-Turkey-Android/actions/workflows/build.yml)
