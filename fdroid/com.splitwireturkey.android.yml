@@ -1,0 +1,46 @@
+Categories:
+  - Internet
+  - Security
+License: GPL-3.0-only
+SourceCode: https://github.com/EmreO33/SplitWire-Turkey-Android
+IssueTracker: https://github.com/EmreO33/SplitWire-Turkey-Android/issues
+Changelog: https://github.com/EmreO33/SplitWire-Turkey-Android/releases
+
+AutoName: DeSync
+Summary: No-root DPI-bypass VPN for Turkey
+Description: |
+    DeSync routes device traffic through a local ByeDPI engine via Android's
+    VpnService to bypass ISP-level DPI (Deep Packet Inspection) blocking of
+    Discord, websites, and other services. No root required, no remote
+    servers involved — all bypass logic runs locally on-device.
+
+    This is not a privacy VPN: it does not hide your IP address or encrypt
+    traffic to a third party. It only restructures packets so DPI cannot
+    analyze them, then sends them out over your normal connection.
+
+    Features:
+    * Ready-made bypass strategy presets (recommended, auto, Discord, SNI split, TLS record split)
+    * Advanced mode for hand-tuned ByeDPI command-line arguments
+    * Per-app routing (bypass only selected apps)
+    * Connection uptime/data-usage stats
+    * Light/dark theme
+    * Turkish and English UI
+
+WebSite: https://github.com/EmreO33/SplitWire-Turkey-Android
+
+RepoType: git
+Repo: https://github.com/EmreO33/SplitWire-Turkey-Android
+
+Builds:
+  - versionName: '1.2.3'
+    versionCode: 10
+    commit: v1.2.3
+    subdir: app
+    ndk: 26.1.10909125
+    gradle:
+      - yes
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: '1.2.3'
+CurrentVersionCode: 10
